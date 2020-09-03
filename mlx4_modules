@@ -1,0 +1,12 @@
+
+# Device
+mlx4_core
+# InfiniBand
+mlx4_ib
+# IP over IB
+ib_ipoib
+# RDMA
+ib_umad
+rdma_ucm
+# NFS over RDMA
+rpcrdma
