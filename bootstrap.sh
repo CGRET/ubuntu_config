@@ -13,4 +13,4 @@ cat /srv/ubuntu_config/mlx4_modules >> /etc/modules
 apt -y update
 apt -y upgrade
 
-exit 1
+exit 0
