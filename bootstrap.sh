@@ -9,6 +9,11 @@ systemctl enable opensm
 
 cat /srv/ubuntu_config/mlx4_modules >> /etc/modules
 
+# Install and configure avahi (AKA Bonjour)
+apt install avahi-daemon avahi-utils
+systemctl enable avahi-daemon
+cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
+
 # Update and Upgrade
 apt -y update
 apt -y upgrade
