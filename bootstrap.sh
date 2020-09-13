@@ -12,7 +12,7 @@ cat /srv/ubuntu_config/mlx4_modules >> /etc/modules
 # Install and configure avahi (AKA Bonjour)
 apt -y install avahi-daemon avahi-utils
 systemctl enable avahi-daemon
-avahi-set-host-name $(hostname)
+sed --in-place=.orig "s/#host-name=foo/host-name=$(hostname)/" /etc/avahi/avahi-daemon.conf
 
 # Update and Upgrade
 apt -y update
