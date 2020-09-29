@@ -1,0 +1,9 @@
+network:
+    ethernets:
+        ib:
+           match:
+              driver: ib_ipoib
+              name: ib*
+           link-local: [ ipv4, ipv6 ]
+    version: 2
+
