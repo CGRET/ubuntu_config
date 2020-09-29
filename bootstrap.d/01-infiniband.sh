@@ -16,4 +16,5 @@ systemctl enable opensm
 
 cat /srv/ubuntu_config/mlx4_modules >> /etc/modules
 
-cp /srv/ubuntu_confing/etc/netplan/60-infiniband.yaml /etc/netplan/
+cp /srv/ubuntu_config/etc/netplan/60-infiniband.yaml /etc/netplan/60-infiniband.yaml
+
