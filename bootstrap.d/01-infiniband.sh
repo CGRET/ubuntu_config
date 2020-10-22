@@ -14,7 +14,9 @@ popd
 apt --yes install opensm ibutils ibverbs-utils rdmacm-utils libibmad-dev numactl perftest iperf qperf mstflint
 systemctl enable opensm
 
-cat /srv/ubuntu_config/mlx4_modules >> /etc/modules
+cat /srv/ubuntu_config/etc/mlx4_modules >> /etc/modules
+
+cp /srv/ubuntu_config/etc/modprobe.d/mlx_core.conf /etc/modprobe.d/mlx_core.conf
 
 cp /srv/ubuntu_config/etc/netplan/60-infiniband.yaml /etc/netplan/60-infiniband.yaml
 
