@@ -11,7 +11,7 @@ popd
 
 
 # Install InfiniBand drivers and software
-apt --yes install opensm ibutils ibverbs-utils rdmacm-utils libibmad-dev numactl perftest iperf qperf mstflint
+apt --yes install opensm ibutils libibverbs-dev ibverbs-utils rdmacm-utils libibmad-dev numactl perftest iperf qperf mstflint
 systemctl enable opensm
 
 cat /srv/ubuntu_config/etc/mlx4_modules >> /etc/modules
