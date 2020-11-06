@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Install Mellanox Firware Tools (MFT)
+# Install Mellanox Firmware Tools (MFT)
 apt --yes install build-essential make dkms wget
 wget https://www.mellanox.com/downloads/MFT/mft-4.15.0-104-x86_64-deb.tgz
 tar xvzf mft-4.15.0-104-x86_64-deb.tgz
