@@ -10,5 +10,5 @@ c_rehash
 # Configure ldap utilities
 mkdir -p /etc/ldap
 cat /srv/ubuntu_config/etc/hosts >> /etc/hosts
-cat /srv/ubuntu_config/etc/ldap/ldap.conf >> /etc/ldap.conf
+cat /srv/ubuntu_config/etc/ldap/ldap.conf >> /etc/ldap/ldap.conf
 
