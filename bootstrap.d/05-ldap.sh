@@ -9,6 +9,9 @@ c_rehash
 
 # Configure ldap utilities
 mkdir -p /etc/ldap
+
+# This is overwritten by MAAS, might be able to fix with systemd-resolve
 cat /srv/ubuntu_config/etc/hosts >> /etc/hosts
+
 cat /srv/ubuntu_config/etc/ldap/ldap.conf >> /etc/ldap/ldap.conf
 
