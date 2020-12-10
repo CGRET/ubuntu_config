@@ -3,7 +3,7 @@ network:
         ib:
            match:
               driver: ib_ipoib
-              name: ib*
+              name: ib*0
+           dhcp4: yes
            link-local: [ ipv4, ipv6 ]
     version: 2
-
