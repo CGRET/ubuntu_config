@@ -13,6 +13,7 @@ ipa-client-install --unattended \
 --server=ipa.maas.dss.cdn.local \
 --domain dss.cdn.local \
 --realm DSS.CDN.LOCAL \
+--force-join \
 --principal=admin \
 --password=${PASSWORD}
 
