@@ -14,7 +14,7 @@ sudo apt-get update \
 # Configure go
 #export PATH=/usr/local/go/bin:${PATH}
 
-sudo snap install go
+# sudo snap install go
 
 # Download, build, and install singularity
 
