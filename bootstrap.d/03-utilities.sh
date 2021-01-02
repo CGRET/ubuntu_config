@@ -1,8 +1,6 @@
 #!/bin/sh
 
 #apt --yes install environment-modules
-apt --yes install ubuntu-drivers-common inetutils-traceroute maas-cli
+apt --yes install ubuntu-drivers-common inetutils-traceroute maas-cli golang
 
-# Install golang for use by singularity
-snap install --color=never --unicode=never go --classic
 
