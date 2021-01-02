@@ -8,7 +8,7 @@ sudo apt-get update \
 
 # Download and extract go into /usr/local
 #export VERSION=1.14.12 OS=linux ARCH=amd64 \
-#&& wget -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz \
+#&& wget --quiet -O /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${VERSION}.${OS}-${ARCH}.tar.gz \
 #&& sudo tar -C /usr/local -xzf /tmp/go${VERSION}.${OS}-${ARCH}.tar.gz
 
 # Configure go
@@ -23,7 +23,7 @@ mkdir singularity
 cd singularity
 
 export VERSION=3.7.0 && # adjust this as necessary \
-wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
+wget --quiet https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
 && tar -xzf singularity-${VERSION}.tar.gz \
 &&  cd singularity
 
