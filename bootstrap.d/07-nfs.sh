@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apt-get --yes install  nfs-common
+apt-get --yes install  nfs-common autofs
 mkdir /share
 chmod 777 /share
 # Count ConnectX cards
