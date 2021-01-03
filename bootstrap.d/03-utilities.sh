@@ -1,6 +1,6 @@
 #!/bin/sh
 
 #apt --yes install environment-modules
-apt --yes install ubuntu-drivers-common inetutils-traceroute maas-cli golang
+apt --yes install ubuntu-drivers-common inetutils-traceroute golang
 
 

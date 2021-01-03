@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Count NVIDIA GPUs
-NVIDA_GPU=$(lspci | grep VGA | grep NVIDIA | wc -l)
+NVIDIA_GPU=$(lspci | grep VGA | grep NVIDIA | wc -l)
 if [ "$NVIDIA_GPU" -eq "0" ]; then
 	exit 0
 fi

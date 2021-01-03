@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install Mellanox Firmware Tools (MFT)
-apt --yes install build-essential make dkms wget
+apt --yes install build-essential make dkms wget linux-headers linux-headers-generic
 wget --quiet https://www.mellanox.com/downloads/MFT/mft-4.15.0-104-x86_64-deb.tgz
 tar xvzf mft-4.15.0-104-x86_64-deb.tgz
 pushd .
@@ -12,7 +12,7 @@ popd
 
 # Install InfiniBand drivers and software
 apt --yes install opensm ibutils libibverbs-dev ibverbs-utils rdmacm-utils libibmad-dev numactl perftest iperf qperf mstflint
-systemctl enable opensm linux-headers linux-headers-generic
+systemctl enable opensm
 
 cat /srv/ubuntu_config/etc/mlx4_modules >> /etc/modules
 
