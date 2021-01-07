@@ -21,7 +21,7 @@ echo ${PASSWORD} | kinit admin
 
 ipa hostgroup-add-member \
 --hosts $(hostname -f) \
---groups masspod
+--groups massnodes
 
 rm /srv/.pass
 
