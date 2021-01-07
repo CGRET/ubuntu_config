@@ -17,6 +17,12 @@ ipa-client-install --unattended \
 --principal=admin \
 --password=${PASSWORD}
 
+echo ${PASSWORD} | kinit admin
+
+ipa hostgroup-add-member \
+--hosts $(hostname -f) \
+--groups masspod
+
 rm /srv/.pass
 
 
