@@ -23,6 +23,12 @@ ipa hostgroup-add-member \
 --hosts $(hostname -f) \
 --groups massnodes
 
+ipa service-add nfs/$(hostname -f)
+
+ipa-client-automount \
+--location=default \
+--server=ipa.dss.cdn.local
+
 rm /srv/.pass
 
 
