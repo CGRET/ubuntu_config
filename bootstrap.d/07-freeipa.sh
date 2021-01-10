@@ -28,7 +28,8 @@ ipa-client-install --unattended \
 --realm=DSS.CDN.LOCAL \
 --force-join \
 --principal=admin \
---password=${PASSWORD}
+--password=${PASSWORD} \
+--enable-dns-updates
 
 echo ${PASSWORD} | kinit admin
 
