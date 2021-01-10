@@ -4,11 +4,12 @@ DEBIAN_FRONTEND=noninteractive apt-get -yq install freeipa-client
 
 # FreeIPA requires fully-qualified hostname
 hostnamectl set-hostname $(hostname).dss.cdn.local
+HOSTNAME=$(hostname -f)
 
 PASSWORD=$(cat /srv/.pass)
 
 ipa-client-install --unattended \
---hostname=$(hostname -f) \
+--hostname=${HOSTNAME} \
 --mkhomedir \
 --server=ipa.dss.cdn.local \
 --domain dss.cdn.local \
@@ -19,11 +20,12 @@ ipa-client-install --unattended \
 
 echo ${PASSWORD} | kinit admin
 
-ipa hostgroup-add-member \
---hosts $(hostname -f) \
---groups massnodes
+#ipa hostgroup-add massnodes --desc="MAAS Nodes"
 
-ipa service-add nfs/$(hostname -f)
+ipa hostgroup-add-member maasnodes \
+--hosts ${HOSTNAME}
+
+ipa service-add nfs/${HOSTNAME}
 
 ipa-client-automount \
 --location=default \
