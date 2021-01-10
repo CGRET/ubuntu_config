@@ -1,5 +1,13 @@
 #!/bin/sh
 
+
+# Count ConnectX cards
+CX=$(lspci | grep ConnectX | wc -l)
+if [ "$CX" -eq "0" ]; then
+	echo "No ConnectX detected.  Skipping Infiniband install."
+        exit 0
+fi
+
 # Install Mellanox Firmware Tools (MFT)
 apt --yes install build-essential make dkms wget
 wget --quiet https://www.mellanox.com/downloads/MFT/mft-4.15.0-104-x86_64-deb.tgz
