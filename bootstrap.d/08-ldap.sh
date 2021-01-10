@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# Install ldap utilities
-apt-get install --yes ldap-utils
+echo "Installing  ldap utilities"
+apt-get --yes --quiet install ldap-utils
 

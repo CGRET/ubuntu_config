@@ -1,11 +1,10 @@
 #!/bin/sh
 
-# Install pre-reqs
-sudo apt-get update \
-&& sudo apt-get install -y build-essential libseccomp-dev pkg-config squashfs-tools cryptsetup
+echo "Install singularity pre-reqs."
+apt-get --yes --quiet install build-essential libseccomp-dev pkg-config squashfs-tools cryptsetup
 
 
-# Download, build, and install singularity
+echo "Download, build, and install singularity."
 
 pushd .
 mkdir singularity

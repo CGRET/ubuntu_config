@@ -1,8 +1,13 @@
 #!/bin/sh
 
-apt-get --yes install  nfs-common autofs
+echo "Install NFS and autofs"
+apt-get --yes --quiet install  nfs-common autofs
+
+echo "Creating /share directory."
 mkdir /share
 chmod 777 /share
+
+echo "Configuring NFS mount for /share."
 # Count ConnectX cards
 CX=$(lspci | grep ConnectX | wc -l)
 if [ "$CX" -eq "0" ]; then

@@ -1,11 +1,13 @@
 #!/bin/sh
 
+echo "Checking for IP that can reach 10.236.0.23:"
 CDN_IP=$(ip route get 10.236.0.23 |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
 echo "IP that can reach 10.236.0.23: ${CDN_IP}"
 
+echo "Installing freeipa-client."
 DEBIAN_FRONTEND=noninteractive apt-get -yq install freeipa-client
 
-# FreeIPA requires fully-qualified hostname
+echo "FreeIPA requires fully-qualified hostname"
 echo "Adding dss.cdn.local to hostname."
 HOSTNAME=$(hostname).dss.cdn.local
 echo "hostname: ${HOSTNAME}"
@@ -19,7 +21,7 @@ fi
 
 PASSWORD=$(cat /srv/.pass)
 
-echo "installing ${HOSTNAME}"
+echo "ipa-client-install for ${HOSTNAME}"
 ipa-client-install --unattended \
 --hostname=${HOSTNAME} \
 --mkhomedir \
@@ -33,19 +35,19 @@ ipa-client-install --unattended \
 
 echo ${PASSWORD} | kinit admin
 
-echo "adding A record and reverse PTR"
+echo "Adding A record and reverse PTR"
 # Note the . at the end of domain
 ipa dnsrecord-add dss.cdn.local. $(hostname) --a-rec=${CDN_IP} --a-create-reverse
 
 #ipa hostgroup-add massnodes --desc="MAAS Nodes"
 
-echo "adding $(hostname) to massnodes hostgroup."
+echo "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
-echo "creating client nfs/${HOSTNAME} entry."
+echo "Creating client nfs/${HOSTNAME} entry."
 ipa service-add nfs/${HOSTNAME}
 
-echo "setting up automount."
+echo "Setting up automount."
 ipa-client-automount \
 --location=default \
 --server=ipa.dss.cdn.local
