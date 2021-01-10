@@ -33,6 +33,15 @@ ipa-client-install --unattended \
 --password=${PASSWORD} \
 --enable-dns-updates
 
+OK=$?
+if [ ! "$OK" -eq "0" ]; then
+        echo "ipa-client-install failed with error ${OK}"
+	rm /srv/.pass
+        exit 0
+fi
+
+
+echo "Getting TGT from realm."
 echo ${PASSWORD} | kinit admin
 
 echo "Adding A record and reverse PTR"
