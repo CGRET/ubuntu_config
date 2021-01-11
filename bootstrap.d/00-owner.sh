@@ -30,5 +30,3 @@ if usermod -aG ${GROUP} ${USER}; then
   echo "${USER} ALL=(ALL) NOPASSWD: ALL" > ${FILE}
 fi
 
-adduser --create-home --home /owner --password ${PASSWORD}
-
