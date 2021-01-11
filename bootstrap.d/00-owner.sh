@@ -10,14 +10,15 @@ fi
 
 PASSWORD=$(cat /srv/.pass)
 
-adduser ${USER}
+adduser --disabled-password --gecos "" ${USER}
 
 mkdir /${USER}
 chown ${USER}:${USER} /${USER}
 chmod 700 /${USER}
 usermod --home /${USER} ${USER}
-cp -a /home/${USER} /${USER}
-echo ${PASSWORD} | passwd ${USER} --stdin
+cp -a /home/${USER}/. /${USER}/
+rm -fr /home/${USER}
+echo "${USER}:${PASSWORD}" | chpasswd
 
 # use sudo or wheel
 GROUP=$(getent group sudo | cut -d':' -f1)
