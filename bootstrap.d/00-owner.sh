@@ -17,7 +17,7 @@ chown ${USER}:${USER} /${USER}
 chmod 700 /${USER}
 usermod --home /${USER} ${USER}
 cp -a /home/${USER} /${USER}
-echo ${PASSWORD} | passwd ${USER}
+echo ${PASSWORD} | passwd ${USER} --stdin
 
 # use sudo or wheel
 GROUP=$(getent group sudo | cut -d':' -f1)
