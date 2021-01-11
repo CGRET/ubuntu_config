@@ -5,6 +5,9 @@ echo "Checking for IP that can reach 10.236.0.23:"
 CDN_IP=$(ip route get 10.236.0.23 |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
 echo "IP that can reach 10.236.0.23: ${CDN_IP}"
 
+echo "systemd-resolve --status"
+systemd-resolve --status
+
 #echo "Setting DNS server and domain."
 #systemd-resolve --set-dns=10.236.0.23 --set-domain=dss.cdn.local
 
@@ -12,7 +15,7 @@ echo "systemd-resolve --status"
 systemd-resolve --status
 
 echo "Installing freeipa-client."
-DEBIAN_FRONTEND=noninteractive apt-get -yq install freeipa-client
+DEBIAN_FRONTEND=noninteractive apt-get -yqq install freeipa-client
 
 echo "FreeIPA requires fully-qualified hostname"
 echo "Adding dss.cdn.local to hostname."
@@ -38,6 +41,7 @@ ipa-client-install --unattended \
 --force-join \
 --principal=admin \
 --password=${PASSWORD} \
+--ip-address=${CDN_IP} \
 --enable-dns-updates
 
 OK=$?

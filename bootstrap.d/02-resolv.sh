@@ -14,8 +14,9 @@ sed --in-place "s/#Domains=/Domains=dss.cdn.local/" /etc/systemd/resolved.conf
 #echo "Reload configuration."
 #systemctl daemon-reload
 
-echo "Restarting systemd-resolved"
-systemctl restart systemd-resolved
+# Same chroot problem
+#echo "Restarting systemd-resolved"
+#systemctl restart systemd-resolved
 
 echo "systemd-resolve --status"
 systemd-resolve --status
