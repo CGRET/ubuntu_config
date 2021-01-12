@@ -1,12 +1,12 @@
 #!/bin/bash
 
-echo "Checking for /etc/rc.local.d"
+logger -p user.info -t rc.local  "Checking for /etc/rc.local.d"
 if [ -d /etc/rc.local.d ]; then
   for i in /etc/rc.local.d/*.sh; do
     if [ -r $i ]; then
+      logger -p user.info -t rc.local "running ${i}"
       . $i
     fi
   done
   unset i
 fi
-
