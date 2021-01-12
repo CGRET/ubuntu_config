@@ -47,8 +47,17 @@ ipa dnsrecord-add dss.cdn.local. $(hostname) --a-rec=${CDN_IP} --a-create-revers
 echo "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
+# Create the clients key on the ipa server
 echo "Creating client nfs/${HOSTNAME} entry."
 ipa service-add nfs/${HOSTNAME}
+
+# Get the previously created key
+# and store it in the clients keytab
+echo "Updating krb5.keytab"
+ipa-getkeytab \
+--server=ipa.dss.cdn.local \
+--principal=nfs/${HOSTNAME} \
+--keytab=/etc/krb5.keytab
 
 echo "Setting up automount."
 ipa-client-automount \
