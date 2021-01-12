@@ -1,6 +1,12 @@
 #!/bin/bash
-# The systemd-networkd DHCP implementation does not work wit IP over InfiniBand (ipoib).
-# This is a horrid hack to force the use of dhclient for ipoib interfaces
-IPoIB=$(ip --brief link show type ipoib | cut -d' ' -f1)
-dhclient ${IPoIB}
-exit 0
+
+echo "Checking for /etc/rc.local.d"
+if [ -d /etc/rc.local.d ]; then
+  for i in /etc/rc.local.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+

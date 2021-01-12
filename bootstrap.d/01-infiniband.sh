@@ -29,8 +29,6 @@ cp /srv/ubuntu_config/etc/modprobe.d/mlx4_core.conf /etc/modprobe.d/mlx4_core.co
 
 cp /srv/ubuntu_config/etc/netplan/60-infiniband.yaml /etc/netplan/60-infiniband.yaml
 
-echo "Configuring DHCP hack for IPoIB interface."
-cp /srv/ubuntu_config/etc/rc.local /etc/rc.local
-systemctl enable rc-local
+echo "Check rc.local for the DHCP hack for IPoIB interface."
 
 
