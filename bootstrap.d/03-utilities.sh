@@ -3,7 +3,7 @@
 #apt --yes install environment-modules
 
 echo "Installing utilities."
-apt-get --yes --quiet install ubuntu-drivers-common inetutils-traceroute
+apt-get --yes --quiet install ldap-utils ubuntu-drivers-common inetutils-traceroute
 
 echo "Installing golang."
 apt-get --yes --quiet install golang
