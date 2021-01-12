@@ -60,6 +60,7 @@ ipa service-add nfs/${HOSTNAME}
 
 echo "Setting up automount."
 ipa-client-automount \
+--unattended \
 --location=default \
 --server=ipa.dss.cdn.local
 
