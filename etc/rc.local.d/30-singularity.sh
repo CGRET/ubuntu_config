@@ -1,7 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-INSTALLED=$(which singularity)
-if [ ! "$INSTALLED" -eq "0" ]; then
+if ! command -v singularity; then
 
 echo "Install singularity pre-reqs."
 apt-get --yes --quiet install build-essential libseccomp-dev pkg-config squashfs-tools cryptsetup
