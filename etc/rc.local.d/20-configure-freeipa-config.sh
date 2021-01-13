@@ -70,5 +70,5 @@ fi
 
 fi
 
-echo "Will not configure freeIPA: no password set."
+#echo "Will not configure freeIPA: no password set."
 
