@@ -16,7 +16,7 @@ logger -p user.info -t rc.local  "IP that can reach 10.236.0.23: ${CDN_IP}"
 
 # freeIPA requires fully-qualified hostname
 logger -p user.info -t rc.local  "Adding dss.cdn.local to hostname."
-HOSTNAME=$(hostname).dss.cdn.local
+HOSTNAME=$(hostname -s).dss.cdn.local
 logger -p user.info -t rc.local  "hostname: ${HOSTNAME}"
 hostnamectl set-hostname ${HOSTNAME}
 
