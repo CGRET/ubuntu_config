@@ -21,3 +21,5 @@ echo "Configuring NFS mount for /share."
 echo "ipa.dss.cdn.local:/exports/home /home   nfs4    rw,hard,intr,sec=krb5 0 0" >> /etc/fstab
 echo "ipa.dss.cdn.local:/exports/share /share   nfs4    rw,hard,intr,sec=krb5 0 0" >> /etc/fstab
 
+systemctl enable nfs
+
