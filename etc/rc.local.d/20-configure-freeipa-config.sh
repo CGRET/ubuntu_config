@@ -59,16 +59,15 @@ ipa-getkeytab \
 --principal=nfs/${HOSTNAME} \
 --keytab=/etc/krb5.keytab
 
-echo "Setting up automount."
-ipa-client-automount \
---unattended \
---location=default \
---server=ipa.dss.cdn.local
+#echo "Setting up automount."
+#ipa-client-automount \
+#--unattended \
+#--location=default \
+#--server=ipa.dss.cdn.local
 
 rm /srv/.pass
 fi
 
+else
+ logger -p user.info -t rc.local  "Will not configure freeIPA: no password set."
 fi
-
-#echo "Will not configure freeIPA: no password set."
-
