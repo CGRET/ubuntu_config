@@ -40,7 +40,7 @@ echo ${PASSWORD} | kinit admin
 
 echo "Adding A record and reverse PTR"
 # Note the . at the end of domain
-ipa dnsrecord-add dss.cdn.local. $(hostname) --a-rec=${CDN_IP} --a-create-reverse
+ipa dnsrecord-add dss.cdn.local. $(hostname -s) --a-rec=${CDN_IP} --a-create-reverse
 
 #ipa hostgroup-add massnodes --desc="MAAS Nodes"
 
@@ -60,14 +60,17 @@ ipa-getkeytab \
 --keytab=/etc/krb5.keytab
 
 #echo "Setting up automount."
-#ipa-client-automount \
-#--unattended \
-#--location=default \
-#--server=ipa.dss.cdn.local
+ipa-client-automount \
+--unattended \
+--location=default \
+--server=ipa.dss.cdn.local
 
 rm /srv/.pass
+
 fi
 
 else
+
  logger -p user.info -t rc.local  "Will not configure freeIPA: no password set."
+
 fi
