@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo "Install NFS"
-apt-get --yes --quiet install  nfs-common
+echo "Install NFS and autofs"
+apt-get --yes --quiet install  nfs-common autofs
 
 echo "Creating /share directory."
 mkdir /share
