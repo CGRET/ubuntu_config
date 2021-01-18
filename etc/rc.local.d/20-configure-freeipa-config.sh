@@ -40,7 +40,7 @@ echo ${PASSWORD} | kinit admin
 
 echo "Adding A record and reverse PTR"
 # Note the . at the end of domain
-ipa dnsrecord-add dss.cdn.local. $(hostname) --a-rec=${CDN_IP} --a-create-reverse
+ipa dnsrecord-add dss.cdn.local. $(hostname -s) --a-rec=${CDN_IP} --a-create-reverse
 
 #ipa hostgroup-add massnodes --desc="MAAS Nodes"
 
@@ -57,6 +57,18 @@ echo "Updating krb5.keytab"
 ipa-getkeytab \
 --server=ipa.dss.cdn.local \
 --principal=nfs/${HOSTNAME} \
+--keytab=/etc/krb5.keytab
+
+# Create the clients key on the ipa server
+echo "Creating client host/${HOSTNAME} entry."
+ipa service-add host/${HOSTNAME}
+
+# Get the previously created key
+# and store it in the clients keytab
+echo "Updating krb5.keytab"
+ipa-getkeytab \
+--server=ipa.dss.cdn.local \
+--principal=host/${HOSTNAME} \
 --keytab=/etc/krb5.keytab
 
 echo "Setting up automount."
