@@ -6,7 +6,7 @@ logger -p user.info -t rc.local  "Checking if we should configure freeIPA client
 
 if [ -f /srv/.pass ]; then
 
-logger -p user.info -t rc.local "Will configer freeIPA."
+logger -p user.info -t rc.local "Will configure freeIPA."
 PASSWORD=$(cat /srv/.pass)
 
 
