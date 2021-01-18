@@ -14,6 +14,6 @@ echo "Replace hosts template"
 cp /srv/ubuntu_config/etc/cloud/templates/hosts.debian.tmpl /etc/cloud/templates/hosts.debian.tmpl
 
 CDN_IP=$(ip route get 10.236.0.23 |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-
-sed --in-place "s/CDN_IP/${CDN_IP}" /etc/cloud/templates/hosts.debian.tmpl
+echo "Update IP to ${CDN_IP} in template."
+sed --in-place 's/CDN_IP/'"${CDN_IP}"'/' /etc/cloud/templates/hosts.debian.tmpl
 
