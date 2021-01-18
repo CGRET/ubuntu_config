@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo "Install NFS"
-apt-get --yes --quiet install  nfs-common
+echo "Install NFS and autofs"
+apt-get --yes --quiet install  nfs-common autofs
 
 echo "Creating /share directory."
 mkdir /share
@@ -18,8 +18,6 @@ echo "Configuring NFS mount for /share."
 #echo "#10.236.0.23:/exports/share	/share	nfs	auto	0	0" >> /etc/fstab
 #echo "192.168.238.23:/exports/share	/share	nfs	auto	0	0" >> /etc/fstab
 
-echo "ipa.dss.cdn.local:/exports/home /home   nfs4    rw,hard,intr,sec=krb5 0 0" >> /etc/fstab
-echo "ipa.dss.cdn.local:/exports/share /share   nfs4    rw,hard,intr,sec=krb5 0 0" >> /etc/fstab
-
-#systemctl enable nfs
+echo "ipa.dss.cdn.local:/home /home   nfs4    rw,hard,intr,sec=krb5,vers=4.2 0 0" >> /etc/fstab
+echo "ipa.dss.cdn.local:/share /share   nfs4    rw,hard,intr,sec=krb5,vers=4.2 0 0" >> /etc/fstab
 

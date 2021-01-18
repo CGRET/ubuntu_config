@@ -35,52 +35,54 @@ ipa-client-install --unattended \
 OK=$?
 if [  "$OK" -eq "0" ]; then
 
-echo "Getting TGT from realm."
+logger -p user.info -t rc.local  "Getting TGT from realm."
 echo ${PASSWORD} | kinit admin
 
-echo "Adding A record and reverse PTR"
+logger -p user.info -t rc.local  "Adding A record and reverse PTR"
 # Note the . at the end of domain
 ipa dnsrecord-add dss.cdn.local. $(hostname -s) --a-rec=${CDN_IP} --a-create-reverse
 
 #ipa hostgroup-add massnodes --desc="MAAS Nodes"
 
-echo "Adding $(hostname) to massnodes hostgroup."
+logger -p user.info -t rc.local  "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
 # Create the clients key on the ipa server
-echo "Creating client nfs/${HOSTNAME} entry."
+logger -p user.info -t rc.local  "Creating client nfs/${HOSTNAME} entry."
 ipa service-add nfs/${HOSTNAME}
 
 # Get the previously created key
 # and store it in the clients keytab
-echo "Updating krb5.keytab"
+logger -p user.info -t rc.local  "Updating krb5.keytab with nfs/${HOSTNAME}"
 ipa-getkeytab \
 --server=ipa.dss.cdn.local \
 --principal=nfs/${HOSTNAME} \
 --keytab=/etc/krb5.keytab
 
 # Create the clients key on the ipa server
-echo "Creating client host/${HOSTNAME} entry."
+logger -p user.info -t rc.local  "Creating client host/${HOSTNAME} entry."
 ipa service-add host/${HOSTNAME}
 
 # Get the previously created key
 # and store it in the clients keytab
-echo "Updating krb5.keytab"
+logger -p user.info -t rc.local  "Updating krb5.keytab with host/${HOSTNAME}"
 ipa-getkeytab \
 --server=ipa.dss.cdn.local \
 --principal=host/${HOSTNAME} \
 --keytab=/etc/krb5.keytab
 
-echo "Setting up automount."
+logger -p user.info -t rc.local "Setting up automount."
 ipa-client-automount \
 --unattended \
 --location=default \
 --server=ipa.dss.cdn.local
 
 rm /srv/.pass
-fi
 
 fi
 
-#echo "Will not configure freeIPA: no password set."
+else
 
+ logger -p user.info -t rc.local  "Will not configure freeIPA: no password set."
+
+fi
