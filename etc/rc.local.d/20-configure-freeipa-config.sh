@@ -78,7 +78,7 @@ ipa-client-automount \
 --server=ipa.dss.cdn.local
 
 rm /srv/.pass
-
+logger -p user.info -t rc.local "freeIPA configuration complete."
 fi
 
 else

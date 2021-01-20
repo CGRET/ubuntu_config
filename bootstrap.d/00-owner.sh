@@ -1,10 +1,10 @@
 #!/bin/sh
 
 USER="owner"
-echo "Creating ${USER}"
+logger -p user.info -t bootstrap "Creating ${USER}"
 
 if [ ! -f /srv/.pass ]; then
-        echo "Missing password.  Will not create ${USER}"
+        logger -p user.info -t bootstrap "Missing password.  Will not create ${USER}"
         exit 0
 fi
 
