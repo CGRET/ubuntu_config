@@ -9,10 +9,13 @@ if [ -f /srv/.pass ]; then
 logger -p user.info -t rc.local "Will configure freeIPA."
 PASSWORD=$(cat /srv/.pass)
 
+target="10.236.0.23"
+logger -p user.info -t rc.local  "Checking for IP that can reach ${target}:"
+count=$( ping -c 1 $target | grep icmp* | wc -l )
+if [ $count -eq 1 ]; then
 
-logger -p user.info -t rc.local  "Checking for IP that can reach 10.236.0.23:"
-CDN_IP=$(ip route get 10.236.0.23 |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-logger -p user.info -t rc.local  "IP that can reach 10.236.0.23: ${CDN_IP}"
+CDN_IP=$(ip route get ${target} |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+logger -p user.info -t rc.local  "IP that can reach ${target}: ${CDN_IP}"
 
 # freeIPA requires fully-qualified hostname
 logger -p user.info -t rc.local  "Adding dss.cdn.local to hostname."
@@ -81,8 +84,12 @@ rm /srv/.pass
 logger -p user.info -t rc.local "freeIPA configuration complete."
 fi
 
+# end of ping check
 else
+	logger -p user.info -t rc.local  "Could not reach ${target}."
+fi
 
- logger -p user.info -t rc.local  "Will not configure freeIPA: no password set."
-
+# end of .pass check
+else
+	logger -p user.info -t rc.local  "Will not configure freeIPA: no password set."
 fi
