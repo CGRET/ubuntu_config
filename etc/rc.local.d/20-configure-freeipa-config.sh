@@ -6,13 +6,14 @@ logger -p user.info -t rc.local  "Checking if we should configure freeIPA client
 
 if [ -f /srv/.pass ]; then
 
-logger -p user.info -t rc.local "Will configure freeIPA."
+logger -p user.info -t rc.local "Credentials located."
 PASSWORD=$(cat /srv/.pass)
 
 target="10.236.0.23"
 logger -p user.info -t rc.local  "Checking for IP that can reach ${target}:"
 count=$( ping -c 1 $target | grep icmp* | wc -l )
 if [ $count -eq 1 ]; then
+
 
 CDN_IP=$(ip route get ${target} |  awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
 logger -p user.info -t rc.local  "IP that can reach ${target}: ${CDN_IP}"
@@ -23,7 +24,10 @@ HOSTNAME=$(hostname -s).dss.cdn.local
 logger -p user.info -t rc.local  "hostname: ${HOSTNAME}"
 hostnamectl set-hostname ${HOSTNAME}
 
-logger -p user.info -t rc.local  "ipa-client-install for ${HOSTNAME}"
+logger -p user.info -t rc.local "Installing freeipa-client"
+DEBIAN_FRONTEND=noninteractive apt-get -yqq install freeipa-client
+
+logger -p user.info -t rc.local  "Configuring ${HOSTNAME} with ipa-client-install"
 ipa-client-install --unattended \
 --hostname=${HOSTNAME} \
 --mkhomedir \
