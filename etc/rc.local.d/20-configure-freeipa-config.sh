@@ -37,7 +37,11 @@ ipa-client-install --unattended \
 --force-join \
 --principal=admin \
 --password=${PASSWORD} \
---enable-dns-updates
+--enable-dns-updates \
+--no-ssh \
+--no-sshd \
+--no-dns-sshfp
+
 
 OK=$?
 if [  "$OK" -eq "0" ]; then
