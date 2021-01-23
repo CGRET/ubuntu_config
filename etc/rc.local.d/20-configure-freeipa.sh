@@ -37,10 +37,11 @@ ipa-client-install --unattended \
 --force-join \
 --principal=admin \
 --password=${PASSWORD} \
---enable-dns-updates \
---no-ssh \
---no-sshd \
---no-dns-sshfp
+--enable-dns-updates 
+
+#--no-ssh \
+#--no-sshd \
+#--no-dns-sshfp
 
 
 OK=$?
@@ -59,28 +60,28 @@ logger -p user.info -t rc.local  "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
 # Create the clients key on the ipa server
-logger -p user.info -t rc.local  "Creating client nfs/${HOSTNAME} entry."
-ipa service-add nfs/${HOSTNAME}
+#logger -p user.info -t rc.local  "Creating client nfs/${HOSTNAME} entry."
+#ipa service-add nfs/${HOSTNAME}
 
 # Get the previously created key
 # and store it in the clients keytab
-logger -p user.info -t rc.local  "Updating krb5.keytab with nfs/${HOSTNAME}"
-ipa-getkeytab \
---server=ipa.dss.cdn.local \
---principal=nfs/${HOSTNAME} \
---keytab=/etc/krb5.keytab
+#logger -p user.info -t rc.local  "Updating krb5.keytab with nfs/${HOSTNAME}"
+#ipa-getkeytab \
+#--server=ipa.dss.cdn.local \
+#--principal=nfs/${HOSTNAME} \
+#--keytab=/etc/krb5.keytab
 
 # Create the clients key on the ipa server
-logger -p user.info -t rc.local  "Creating client host/${HOSTNAME} entry."
-ipa service-add host/${HOSTNAME}
+#logger -p user.info -t rc.local  "Creating client host/${HOSTNAME} entry."
+#ipa service-add host/${HOSTNAME}
 
 # Get the previously created key
 # and store it in the clients keytab
-logger -p user.info -t rc.local  "Updating krb5.keytab with host/${HOSTNAME}"
-ipa-getkeytab \
---server=ipa.dss.cdn.local \
---principal=host/${HOSTNAME} \
---keytab=/etc/krb5.keytab
+#logger -p user.info -t rc.local  "Updating krb5.keytab with host/${HOSTNAME}"
+#ipa-getkeytab \
+#--server=ipa.dss.cdn.local \
+#--principal=host/${HOSTNAME} \
+#--keytab=/etc/krb5.keytab
 
 logger -p user.info -t rc.local "Setting up automount."
 ipa-client-automount \
