@@ -75,12 +75,14 @@ ipa hostgroup-add-member maasnodes --hosts $(hostname)
 #--keytab=/etc/krb5.keytab
 
 # Create the clients key on the ipa server
+# Don't need to do this because the ipa-client-install already does it.
 #logger -p user.info -t "rc.local.${0}"  "Creating client host/${HOSTNAME} entry."
 #ipa service-add host/${HOSTNAME}
 
 # Get the previously created key
 # and store it in the clients keytab
 #logger -p user.info -t "rc.local.${0}"  "Updating krb5.keytab with host/${HOSTNAME}"
+# NOTE: Every time you get the keytab ipa updates the random password for the key.
 #ipa-getkeytab \
 #--server=ipa.dss.cdn.local \
 #--principal=host/${HOSTNAME} \
@@ -98,7 +100,7 @@ fi
 
 # end of ping check
 else
-	logger -p user.info -t "rc.local.${0}"  "Could not reach ${target}."
+	logger -p user.info -t "rc.local.${0}"  "Will not configure freeIPA: could not reach ${target}."
 fi
 
 # end of .pass check
