@@ -23,11 +23,11 @@ mkdir -p /opt/
 pushd /opt/
 
 export VERSION=3.6.3 && # adjust this as necessary \
-wget https://ftp.wayne.edu/apache/maven/maven-3/3.6.3/binaries/apache-maven-${VERSION}-bin.tar.gz \
+wget --quiet https://ftp.wayne.edu/apache/maven/maven-3/3.6.3/binaries/apache-maven-${VERSION}-bin.tar.gz \
 && tar -xzf apache-maven-${VERSION}-bin.tar.gz \
 &&  rm apache-maven-${VERSION}-bin.tar.gz \
 &&  mv apache-maven-${VERSION} apache-maven 
-cp /srv/ubuntu_config/etc/profile.d/maven.sh >> /etc/profile.d/maven.sh
+cp /srv/ubuntu_config/etc/profile.d/maven.sh /etc/profile.d/maven.sh
 
 popd
 
