@@ -62,31 +62,11 @@ ipa dnsrecord-add dss.cdn.local. $(hostname -s) --a-rec=${CDN_IP} --a-create-rev
 logger -p user.info -t "rc.local.${0}"  "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
-# Create the clients key on the ipa server
-#logger -p user.info -t "rc.local.${0}"  "Creating client nfs/${HOSTNAME} entry."
-#ipa service-add nfs/${HOSTNAME}
-
-# Get the previously created key
-# and store it in the clients keytab
-#logger -p user.info -t "rc.local.${0}"  "Updating krb5.keytab with nfs/${HOSTNAME}"
-#ipa-getkeytab \
-#--server=ipa.dss.cdn.local \
-#--principal=nfs/${HOSTNAME} \
-#--keytab=/etc/krb5.keytab
-
-# Create the clients key on the ipa server
-# Don't need to do this because the ipa-client-install already does it.
-#logger -p user.info -t "rc.local.${0}"  "Creating client host/${HOSTNAME} entry."
-#ipa service-add host/${HOSTNAME}
-
-# Get the previously created key
-# and store it in the clients keytab
-#logger -p user.info -t "rc.local.${0}"  "Updating krb5.keytab with host/${HOSTNAME}"
-# NOTE: Every time you get the keytab ipa updates the random password for the key.
-#ipa-getkeytab \
-#--server=ipa.dss.cdn.local \
-#--principal=host/${HOSTNAME} \
-#--keytab=/etc/krb5.keytab
+# Get the Kerberos key for the NFSv4 server on ipa.dss.cdn.local
+ipa-getkeytab \
+--server=ipa.dss.cdn.local \
+--principal=nfs/ipa.dss.cdn.local@DSS.CDN.LOCAL \
+--keytab=/etc/krb5.keytab 
 
 logger -p user.info -t "rc.local.${0}" "Setting up automount."
 ipa-client-automount \
