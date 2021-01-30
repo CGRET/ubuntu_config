@@ -15,14 +15,14 @@ usermod --home /none munge
 adduser -u 1121 slurm --disabled-password --gecos "" --no-create-home
 usermod --home /none slurm
 
-logger -p user.info -t "bootstrap.${0}" "Installing munge"
-apt-get install --yes --quiet munge libmunge-dev libmunge2
-systemctl enable munge
+#logger -p user.info -t "bootstrap.${0}" "Installing munge"
+#apt-get install --yes --quiet munge libmunge-dev libmunge2
+#systemctl enable munge
 # need to get the munge.key from maas.dss.cdn.local/etc/munge/munge.key 
 #  to /etc/munge/munge.key
 #  will have to do this on first boot in rc.local
 
 
-logger -p user.info -t "bootstrap.${0}" "Installing slurm node"
-apt-get install --yes --quiet slurm-wlm slurm-wlm-basic-plugins slurm-wlm-torque slurmd
-systemctl enable slurmd
+#logger -p user.info -t "bootstrap.${0}" "Installing slurm node"
+#apt-get install --yes --quiet slurm-wlm slurm-wlm-basic-plugins slurm-wlm-torque slurmd
+#systemctl enable slurmd
