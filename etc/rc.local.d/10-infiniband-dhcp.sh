@@ -4,6 +4,6 @@
 
 IPoIB=$(ip --brief link show type ipoib | cut -d' ' -f1)
 
-logger -p user.info -t "rc.local.${0}" "Running dhclient on ${IPoIB}"
+logger -p user.info -t rc.local "Running dhclient on ${IPoIB}"
 
 dhclient ${IPoIB}

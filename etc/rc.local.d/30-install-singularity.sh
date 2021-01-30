@@ -2,11 +2,11 @@
 
 if ! command -v singularity; then
 
-logger -p user.info -t "rc.local.${0}" "Install singularity pre-reqs."
+logger -p user.info -t rc.local "Install singularity pre-reqs."
 apt-get --yes --quiet install build-essential libseccomp-dev pkg-config squashfs-tools cryptsetup
 
 
-logger -p user.info -t "rc.local.${0}" "Download, build, and install singularity."
+logger -p user.info -t rc.local "Download, build, and install singularity."
 
 pushd .
 BUILDDIR=$(mktemp -d)
@@ -24,5 +24,5 @@ $(pwd)/mconfig \
 
 popd
 
-logger -p user.info -t "rc.local.${0}" "Done installing singularity."
+logger -p user.info -t rc.local "Done installing singularity."
 fi
