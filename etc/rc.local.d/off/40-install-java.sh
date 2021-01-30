@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if ! command -v java; then
 
 logger -p user.info -t rc.local "Installing default JDK."
