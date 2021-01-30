@@ -5,8 +5,7 @@ logger -p user.info -t rc.local "Updating ${USER}"
 
 if [ ! -f /srv/.pass ]; then
         logger -p user.info -t rc.local "Missing password.  Will not update ${USER}"
-        exit 0
-fi
+else
 
 if id "${USER}" &>/dev/null; then
 
@@ -43,3 +42,4 @@ else
 	logger -p user.info -t rc.local "${USER} does not exist."
 fi
 
+fi
