@@ -8,6 +8,8 @@ if [ ! -f /srv/.pass ]; then
         exit 0
 fi
 
+if id "${USER}" &>/dev/null; then
+
 PASSWORD=$(cat /srv/.pass)
 
 logger -p user.info -t rc.local "Creating directory /${USER}"
@@ -36,3 +38,8 @@ if usermod -aG ${GROUP} ${USER}; then
 fi
 
 logger -p user.info -t rc.local "Done updating ${USER}"
+
+else
+	logger -p user.info -t rc.local "${USER} does not exist."
+fi
+
