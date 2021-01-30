@@ -7,15 +7,14 @@ if [ "$CX" -eq "0" ]; then
         exit 0
 fi
 
-logger -p user.info -t bootstrap "${CX} ConnectX card(s) detected."
-echo "Installing Mellanox Firmware Tools (MFT)."
-apt-get --yes --quiet install build-essential make dkms wget
-wget --quiet https://www.mellanox.com/downloads/MFT/mft-4.15.0-104-x86_64-deb.tgz
-tar xvzf mft-4.15.0-104-x86_64-deb.tgz
-pushd .
-cd mft-4.15.0-104-x86_64-deb
-$(pwd)/install.sh
-popd
+#logger -p user.info -t bootstrap "${CX} ConnectX card(s) detected."
+#echo "Installing Mellanox Firmware Tools (MFT)."
+#apt-get --yes --quiet install build-essential make dkms wget
+#wget --quiet https://www.mellanox.com/downloads/MFT/mft-4.15.0-104-x86_64-deb.tgz
+#tar xvzf mft-4.15.0-104-x86_64-deb.tgz
+#pushd mft-4.15.0-104-x86_64-deb
+#$(pwd)/install.sh
+#popd
 
 
 logger -p user.info -t bootstrap "Installing InfiniBand drivers, services and software."
