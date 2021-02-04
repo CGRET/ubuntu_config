@@ -10,3 +10,8 @@ ib_umad
 rdma_ucm
 # NFS over RDMA
 rpcrdma
+# RDMA server transport module
+svcrdma
+# RDMA client transport module
+xprtrdma
+
