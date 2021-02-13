@@ -66,6 +66,7 @@ ipa hostgroup-add-member maasnodes --hosts $(hostname)
 ipa-getkeytab \
 --server=ipa.dss.cdn.local \
 --principal=nfs/ipa.dss.cdn.local@DSS.CDN.LOCAL \
+--retrieve \
 --keytab=/etc/krb5.keytab 
 
 logger -p user.info -t rc.local "Setting up automount."
