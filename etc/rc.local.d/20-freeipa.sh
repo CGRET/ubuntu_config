@@ -62,11 +62,14 @@ ipa dnsrecord-add dss.cdn.local. $(hostname -s) --a-rec=${CDN_IP} --a-create-rev
 logger -p user.info -t rc.local  "Adding $(hostname) to massnodes hostgroup."
 ipa hostgroup-add-member maasnodes --hosts $(hostname)
 
-# Get the Kerberos key for the NFSv4 server on ipa.dss.cdn.local
+# Remove host SPN from /etc/krb5.keytab 
+#ipa-rmkeytab --principal host/$(hostname -f) --keytab /etc/krb5.keytab
+
+# Get host SPN and store it in /etc/krb5.keytab
+# Note: w/o the --retreive option this will resent the host SPN password.
 ipa-getkeytab \
 --server=ipa.dss.cdn.local \
---principal=nfs/ipa.dss.cdn.local@DSS.CDN.LOCAL \
---retrieve \
+--principal=host/$(hostname -f)@DSS.CDN.LOCAL \
 --keytab=/etc/krb5.keytab 
 
 logger -p user.info -t rc.local "Setting up automount."
